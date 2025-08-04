@@ -1,14 +1,16 @@
 trigger:
-- none  # or use 'main' if you want auto trigger
+- none  # ya 'main' agar aap auto-trigger chahte hain
 
 pool:
-  vmImage: 'mypool'  # or define your own agent pool
+  name: mypool  # ✅ pool name yahan define hoga
+  demands:
+    - Agent.Name -equals myagent  # ✅ agar specific agent chahte hain
 
 stages:
 - stage: Terraform_Stage
+  displayName: 'Terraform Init & Plan'
   jobs:
   - job: TerraformJob
-    displayName: 'Terraform Init and Plan'
     steps:
     - task: TerraformInstaller@1
       inputs:
